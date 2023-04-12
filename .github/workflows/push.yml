@@ -31,9 +31,11 @@ jobs:
     runs-on: windows-latest
     needs: [build,lint]
     steps:
-    - name: RunTest
+    - name: Setup VSTest.exe
+      uses: Malcolmnixon/Setup-VSTest@v4
+    - name: RunTests
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: echo TEST
+      run: VSTest.Console.exe Debug\UnitTest1.dll
 
   build:
     runs-on: windows-latest
