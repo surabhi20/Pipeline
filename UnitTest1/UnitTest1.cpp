@@ -14,7 +14,8 @@ namespace UnitTest1
 		{
 
 			CoolClass coolClass;
-			Assert::AreEqual(3, coolClass.Calc(1, 2));
+			//Removed one parameter to induce compiler error
+			Assert::AreEqual(coolClass.Calc(1, 2));
 		}
 
 		TEST_METHOD(TestMethod2)
