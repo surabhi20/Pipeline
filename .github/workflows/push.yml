@@ -45,6 +45,45 @@ jobs:
     - name: RunTests
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: VSTest.Console.exe x64\Release\UnitTest1.dll
+      
+  SaveBinary:
+    runs-on: windows-latest
+    needs: [test]
+    
+    steps:
+    
+    - uses: actions/checkout@v3
+      
+    - name: downloadBinaries
+      uses: actions/download-artifact@v3
+      with: 
+        name: my-artifact
+        path: x64\Release\
+        if-no-files-found: error
+        
+    - name: stage
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: copy x64\Release\PipelinesExe.exe .
+      
+    - name: addEmail
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: git config --global user.email "surabhidhariwal2010@gmail.com"
+      
+    - name: addName
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: git config --global user.name "Surabhi Dhariwal"
+      
+    - name: add
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: git add PipelinesExe.exe
+      
+    - name: commit
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: git commit -m "generated"
+      
+    - name: push
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: git push
 
   build:
     runs-on: windows-latest
