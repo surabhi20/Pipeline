@@ -35,7 +35,7 @@ jobs:
       uses: actions/upload-artifact@v3
       with: 
         name: my-artifact
-        path: /Users/Surabhi/Desktop/ #x64\Release\
+        path: x64\Release\
         if-no-files-found: error
     - name: Setup VSTest.exe
       uses: Malcolmnixon/Setup-VSTest@v4
@@ -66,5 +66,5 @@ jobs:
       uses: actions/upload-artifact@v3
       with: 
         name: my-artifact
-        path: /Users/Surabhi/Desktop/
+        path: x64\Release\
         if-no-files-found: error
